@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #
-# date:  2016-06-13
+# date: 2016-06-13
 
 username='rhn-support-ddu'
 #password='xxxx'
@@ -18,6 +18,10 @@ subscription-manager clean
 
 subscription-manager register --username $username
 
+if [ $? -ne 0 ]; then
+    exit
+fi
+
 pool_id=`subscription-manager list --all --available|egrep 'Subscription Name|Pool ID|System Type'|grep -A2 'Employee SKU'|grep -B1 $SystemType|grep Pool|sed 's/Pool ID:           //g'`
 subscription-manager attach --pool $pool_id
 
@@ -25,8 +29,9 @@ channel_list=`subscription-manager repos|egrep 'Repo ID|Enabled'|grep -B1 'Enabl
 subscription-manager repos $channel_list
 
 subscription-manager repos \
-    --enable rhel-$version-server-optional-rpms \
-    --enable rhel-$version-server-supplementary-rpms \
     --enable rhel-$version-server-rpms
+#    --enable rhel-$version-server-optional-rpms \
+#    --enable rhel-$version-server-supplementary-rpms \
+#    --enable rhel-rs-for-rhel-$version-server-rpms \
 #    --enable rhel-ha-for-rhel-$version-server-rpms \
 #    --enable rhel-$version-server-eus-rpms \
