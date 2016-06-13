@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+#
+#  date:  2016-06-13
 
 username='rhn-support-ddu'
 #password='xxxx'
