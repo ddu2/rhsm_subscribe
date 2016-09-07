@@ -3,7 +3,7 @@
 #
 # date: 2016-06-13
 
-username='rhn-support-ddu'
+username='xxxx'
 #password='xxxx'
 
 version=`uname -r | awk -F 'el' '{print $2}' | awk -F '.' '{print $1}'`
